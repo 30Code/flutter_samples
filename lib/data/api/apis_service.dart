@@ -4,6 +4,8 @@ import 'package:flutter_samples/data/model/article_model.dart';
 import 'package:flutter_samples/data/model/banner_model.dart';
 import 'package:flutter_samples/data/model/base_model.dart';
 import 'package:flutter_samples/data/model/hot_word_model.dart';
+import 'package:flutter_samples/data/model/knowledge_tree_model.dart';
+import 'package:flutter_samples/data/model/navigation_model.dart';
 import 'package:flutter_samples/data/model/search_article_model.dart';
 import 'package:flutter_samples/data/model/user_info_model.dart';
 import 'package:flutter_samples/data/model/user_model.dart';
@@ -68,6 +70,24 @@ class ApiService {
       int _id, int _page) async {
     dio.get(Apis.WX_ARTICLE_LIST + "/$_id/$_page/json").then((value) => {
       callback(WXArticleModel.fromJson(value.data))
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取知识体系数据
+  void getKnowledgeDetailList(Function callback, Function errorCallback) async {
+    dio.get(Apis.KNOWLEDGE_TREE_LIST).then((value) {
+      callback(KnowledgeTreeModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取导航列表数据
+  void getNavigationList(Function callback, Function errorCallback) async {
+    dio.get(Apis.NAVIGATION_LIST).then((value) {
+      callback(NavigationModel.fromJson(value.data));
     }).catchError((e) {
       errorCallback(e);
     });
