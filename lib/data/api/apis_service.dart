@@ -6,6 +6,8 @@ import 'package:flutter_samples/data/model/base_model.dart';
 import 'package:flutter_samples/data/model/hot_word_model.dart';
 import 'package:flutter_samples/data/model/knowledge_tree_model.dart';
 import 'package:flutter_samples/data/model/navigation_model.dart';
+import 'package:flutter_samples/data/model/project_article_model.dart';
+import 'package:flutter_samples/data/model/project_tree_model.dart';
 import 'package:flutter_samples/data/model/search_article_model.dart';
 import 'package:flutter_samples/data/model/user_info_model.dart';
 import 'package:flutter_samples/data/model/user_model.dart';
@@ -88,6 +90,24 @@ class ApiService {
   void getNavigationList(Function callback, Function errorCallback) async {
     dio.get(Apis.NAVIGATION_LIST).then((value) {
       callback(NavigationModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取项目分类列表数据
+  void getProjectTreeList(Function callback, Function errorCallback) async {
+    dio.get(Apis.PROJECT_TREE_LIST).then((value) {
+      callback(ProjectTreeModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取项目文章列表数据
+  void getProjectArticleList(Function callback, Function errorCallback, int _id, int _page) async {
+    dio.get(Apis.PROJECT_ARTICLE_LIST + "/$_page/json?cid=$_id").then((value) {
+      callback(ProjectArticleListModel.fromJson(value.data));
     }).catchError((e) {
       errorCallback(e);
     });

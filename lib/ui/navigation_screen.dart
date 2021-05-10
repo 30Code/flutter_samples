@@ -140,7 +140,10 @@ class NavigationScreenState extends BaseWidgetState<NavigationScreen> {
             alignment: Alignment.centerLeft,
             child: itemChildView(_navigationList[index].articles),
           ),
-          Divider(height: 1,)
+          Container(
+            padding: EdgeInsets.only(top: 10),
+            child: Divider(height: 1,),
+          ),
         ],
       ),
     );
@@ -165,15 +168,16 @@ class NavigationScreenState extends BaseWidgetState<NavigationScreen> {
               ),
               labelPadding: EdgeInsets.only(left: 3, right: 3),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-              materialTapTargetSize: MaterialTapTargetSize.padded,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,//它的两个值，一个为padded，一个为shrinkWrap，前者自带margin，后者好像没有margin，紧贴附近的控件
+              elevation: 4,
             ),
           ),
       );
     }
 
     return Wrap(
-      spacing: 2,
-      runSpacing: 4,
+      spacing: 8,
+      runSpacing: 10,
       alignment: WrapAlignment.start,
       children: tiles,
     );
