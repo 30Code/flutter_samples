@@ -4,6 +4,7 @@ import 'package:flutter_samples/data/model/article_model.dart';
 import 'package:flutter_samples/data/model/banner_model.dart';
 import 'package:flutter_samples/data/model/base_model.dart';
 import 'package:flutter_samples/data/model/hot_word_model.dart';
+import 'package:flutter_samples/data/model/knowledge_detail_model.dart';
 import 'package:flutter_samples/data/model/knowledge_tree_model.dart';
 import 'package:flutter_samples/data/model/navigation_model.dart';
 import 'package:flutter_samples/data/model/project_article_model.dart';
@@ -78,9 +79,21 @@ class ApiService {
   }
 
   /// 获取知识体系数据
-  void getKnowledgeDetailList(Function callback, Function errorCallback) async {
+  void getKnowledgeTreeList(Function callback, Function errorCallback) async {
     dio.get(Apis.KNOWLEDGE_TREE_LIST).then((value) {
       callback(KnowledgeTreeModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取知识体系详情数据
+  void getKnowledgeDetailList(
+      Function callback, Function errorCallback, int _page, int _id) async {
+    dio
+        .get(Apis.KNOWLEDGE_DETAIL_LIST + "/$_page/json?cid=$_id")
+        .then((response) {
+      callback(KnowledgeDetailModel.fromJson(response.data));
     }).catchError((e) {
       errorCallback(e);
     });

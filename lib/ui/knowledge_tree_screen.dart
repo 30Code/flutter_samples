@@ -7,6 +7,7 @@ import 'package:flutter_samples/common/common.dart';
 import 'package:flutter_samples/data/api/apis_service.dart';
 import 'package:flutter_samples/data/model/knowledge_tree_model.dart';
 import 'package:flutter_samples/ui/base_widget.dart';
+import 'package:flutter_samples/ui/knowledge_detail_screen.dart';
 import 'package:flutter_samples/utils/route_util.dart';
 import 'package:flutter_samples/utils/toast_util.dart';
 import 'package:flutter_samples/widgets/refresh_helper.dart';
@@ -62,7 +63,7 @@ class KnowledgeTreeScreenState extends BaseWidgetState<KnowledgeTreeScreen> {
   }
 
   Future getKnowledgeTreeList() async {
-    apiService.getKnowledgeDetailList((KnowledgeTreeModel knowledgeTreeModel) {
+    apiService.getKnowledgeTreeList((KnowledgeTreeModel knowledgeTreeModel) {
       if (knowledgeTreeModel.errorCode == Constants.STATUS_SUCCESS) {
         if (knowledgeTreeModel.data.length > 0) {
           showContent().then((value) {
@@ -123,7 +124,7 @@ class KnowledgeTreeScreenState extends BaseWidgetState<KnowledgeTreeScreen> {
     KnowledgeTreeBean item = _list[index];
     return InkWell(
       onTap: () {
-        // RouteUtil.push(context, page);
+        RouteUtil.push(context, KnowledgeDetailScreen(new ValueKey(item)));
       },
       child: Column(
         children: <Widget>[
