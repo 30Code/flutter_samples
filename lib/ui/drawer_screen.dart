@@ -10,7 +10,10 @@ import 'package:flutter_samples/data/model/user_info_model.dart';
 import 'package:flutter_samples/event/login_event.dart';
 import 'package:flutter_samples/event/theme_change_event.dart';
 import 'package:flutter_samples/res/styles.dart';
+import 'package:flutter_samples/ui/collect_screen.dart';
 import 'package:flutter_samples/ui/score_screen.dart';
+import 'package:flutter_samples/ui/setting_screen.dart';
+import 'package:flutter_samples/ui/todo_screen.dart';
 import 'package:flutter_samples/utils/route_util.dart';
 import 'package:flutter_samples/utils/sp_util.dart';
 import 'package:flutter_samples/utils/theme_util.dart';
@@ -193,7 +196,7 @@ class DrawerScreenState extends State<DrawerScreen> with AutomaticKeepAliveClien
                 onTap: () {
                   if (isLogin) {
                     //我的收藏
-
+                    RouteUtil.push(context, CollectScreen());
                   } else {
                     //登录
                     T.show(msg: "请先登录~");
@@ -238,7 +241,7 @@ class DrawerScreenState extends State<DrawerScreen> with AutomaticKeepAliveClien
                 onTap: () {
                   if (isLogin) {
                     //发布
-                    // RouteUtil.push(context, TodoScreen());
+                    RouteUtil.push(context, TodoScreen());
                   } else {
                     T.show(msg: "请先登录~");
                     RouteUtil.push(context, LoginScreen());
@@ -270,7 +273,7 @@ class DrawerScreenState extends State<DrawerScreen> with AutomaticKeepAliveClien
                     size: 24, color: Theme.of(context).primaryColor),
                 onTap: () {
                   //系统设置
-                  // RouteUtil.push(context, SettingScreen());
+                  RouteUtil.push(context, SettingScreen());
                 },
               ),
               Offstage(

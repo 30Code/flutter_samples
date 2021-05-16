@@ -3,6 +3,7 @@ import 'package:flutter_samples/data/api/apis.dart';
 import 'package:flutter_samples/data/model/article_model.dart';
 import 'package:flutter_samples/data/model/banner_model.dart';
 import 'package:flutter_samples/data/model/base_model.dart';
+import 'package:flutter_samples/data/model/collection_model.dart';
 import 'package:flutter_samples/data/model/hot_word_model.dart';
 import 'package:flutter_samples/data/model/knowledge_detail_model.dart';
 import 'package:flutter_samples/data/model/knowledge_tree_model.dart';
@@ -156,6 +157,15 @@ class ApiService {
     });
     dio.post(Apis.USER_REGISTER, data: formData).then((value) {
       callback(UserModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取收藏列表
+  void getCollectionList(Function callback, Function errorCallback, int _page) async {
+    dio.get(Apis.COLLECTION_LIST + "/$_page/json").then((value) {
+      callback(CollectionModel.fromJson(value.data));
     }).catchError((e) {
       errorCallback(e);
     });
