@@ -11,6 +11,7 @@ import 'package:flutter_samples/data/model/navigation_model.dart';
 import 'package:flutter_samples/data/model/project_article_model.dart';
 import 'package:flutter_samples/data/model/project_tree_model.dart';
 import 'package:flutter_samples/data/model/search_article_model.dart';
+import 'package:flutter_samples/data/model/todo_list_model.dart';
 import 'package:flutter_samples/data/model/user_info_model.dart';
 import 'package:flutter_samples/data/model/user_model.dart';
 import 'package:flutter_samples/data/model/user_score_model.dart';
@@ -223,6 +224,15 @@ class ApiService {
   void getUserScoreList(Function callback, Function errorCallback, int _page) async {
     dio.get(Apis.USER_SCORE_LIST + "/$_page/json").then((value) {
       callback(UserScoreModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 获取未完成TODO列表
+  void getNoTodoList(Function callback, Function errorCallback, int _type, int _page) async {
+    dio.post(Apis.NO_TODO_LIST + "/$_type/json/$_page").then((value) {
+      callback(TodoListModel.fromJson(value.data));
     }).catchError((e) {
       errorCallback(e);
     });
