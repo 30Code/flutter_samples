@@ -237,4 +237,41 @@ class ApiService {
       errorCallback(e);
     });
   }
+
+  /// 获取已完成TODO列表
+  Future getDoneTodoList(Function callback, Function errorCallback, int _type, int _page) async {
+    dio.post(Apis.DONE_TODO_LIST + "/$_type/json/$_page").then((response) {
+      callback(TodoListModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 新增一个TODO
+  void addTodo(Function callback, Function errorCallback, params) async {
+    dio.post(Apis.ADD_TODO, queryParameters: params).then((response) {
+      callback(BaseModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 仅更新完成状态Todo
+  void updateTodoState(Function callback, Function errorCallback, int _id, params) async {
+    dio.post(Apis.UPDATE_TODO_STATE + "/$_id/json", queryParameters: params).then((value) {
+      callback(BaseModel.fromJson(value.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
+  /// 根据ID删除TODO
+  void deleteTodoById(
+      Function callback, Function errorCallback, int _id) async {
+    dio.post(Apis.DELETE_TODO_BY_ID + "/$_id/json").then((response) {
+      callback(BaseModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
 }
