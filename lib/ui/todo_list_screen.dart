@@ -9,6 +9,7 @@ import 'package:flutter_samples/data/api/apis_service.dart';
 import 'package:flutter_samples/data/model/base_model.dart';
 import 'package:flutter_samples/data/model/todo_list_model.dart';
 import 'package:flutter_samples/event/refresh_todo_event.dart';
+import 'package:flutter_samples/ui/todo_add_screen.dart';
 import 'package:flutter_samples/utils/route_util.dart';
 import 'package:flutter_samples/utils/toast_util.dart';
 import 'package:flutter_samples/widgets/item_todo_list.dart';
@@ -254,7 +255,7 @@ class TodoListScreenState extends BaseWidgetState<TodoListScreen> {
   Widget fabWidget() {
     return _isShowFAB ? null : FloatingActionButton(
       onPressed: () {
-        // RouteUtil.push(context, null);
+        RouteUtil.push(context, TodoAddScreen(todoType: this.todoType, editKey: 0,));
       },
       heroTag: "todo_list",
       child: Icon(Icons.edit, color: Colors.white,),

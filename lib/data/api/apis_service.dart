@@ -256,6 +256,18 @@ class ApiService {
     });
   }
 
+  /// 根据ID更新TODO
+  void updateTodo(
+      Function callback, Function errorCallback, int _id, params) async {
+    dio
+        .post(Apis.UPDATE_TODO + "/$_id/json", queryParameters: params)
+        .then((response) {
+      callback(BaseModel.fromJson(response.data));
+    }).catchError((e) {
+      errorCallback(e);
+    });
+  }
+
   /// 仅更新完成状态Todo
   void updateTodoState(Function callback, Function errorCallback, int _id, params) async {
     dio.post(Apis.UPDATE_TODO_STATE + "/$_id/json", queryParameters: params).then((value) {

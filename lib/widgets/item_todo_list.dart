@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_samples/data/model/todo_list_model.dart';
+import 'package:flutter_samples/ui/todo_add_screen.dart';
+import 'package:flutter_samples/utils/route_util.dart';
 import 'package:flutter_samples/utils/theme_util.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -71,7 +73,7 @@ class ItemTodoListState extends State<ItemTodoList> {
           actionExtentRatio: 0.25,
           child: InkWell(
             onTap: () {
-              // RouteUtil.push(context, page);
+              RouteUtil.push(context, TodoAddScreen(todoType: todoType, editKey: 1, bean: item,));
             },
             child: Column(
               children: <Widget>[
